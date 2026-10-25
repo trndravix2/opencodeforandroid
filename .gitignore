@@ -1,0 +1,45 @@
+# Keystore and Signing files (CRITICAL PRIVATE - DO NOT COMMIT)
+*.jks
+*.keystore
+dravix-release.jks
+keystore.properties
+local.properties
+
+# Asset Decryption Key & Logs (Secret & Build Logs)
+tools/asset_key.txt
+tools/*.log
+*.log
+
+# Built application files
+*.apk
+*.aar
+*.aab
+
+# Gradle & Build files
+.gradle/
+build/
+app/build/
+bin/
+gen/
+out/
+
+# IDE files
+.idea/
+*.iml
+.idea/caches
+.idea/libraries
+.idea/modules.xml
+.idea/workspace.xml
+
+# Native build
+.cxx/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Files exceeding GitHub's 100MB hard limit
+app/src/main/assets/opencode-aarch64
+app/src/main/assets/opencode-aarch64.enc
+app/src/main/assets/opencode-x86_64
+app/src/main/assets/opencode-x86_64.enc

@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <title>Dravix</title>
+    <style>
+        :root { color-scheme: dark; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        html, body { height: 100%; }
+        body {
+            margin: 0;
+            background: #0a0c10;
+            color: #e5e7eb;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 28px;
+            overflow: hidden;
+        }
+        .glow {
+            position: fixed;
+            width: 420px;
+            height: 420px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(99,102,241,.18), transparent 65%);
+            top: -140px;
+            right: -140px;
+            pointer-events: none;
+        }
+        .logo {
+            width: 66px;
+            height: 66px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #6366f1, #22d3ee);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 800;
+            color: #fff;
+            box-shadow: 0 10px 40px rgba(99,102,241,.35);
+            margin-bottom: 20px;
+        }
+        h1 { font-size: 24px; font-weight: 700; margin: 0 0 6px; letter-spacing: -.02em; }
+        .sub { color: #7c8494; font-size: 13px; margin-bottom: 30px; }
+        .spinner {
+            width: 28px;
+            height: 28px;
+            border: 3px solid #1c2230;
+            border-top-color: #6366f1;
+            border-radius: 50%;
+            animation: spin .9s linear infinite;
+            margin-bottom: 16px;
+        }
+        .spinner.hidden { display: none; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        #status { font-size: 14px; font-weight: 600; color: #a5b4fc; text-align: center; min-height: 20px; }
+        #detail { font-size: 12px; color: #6b7280; margin-top: 8px; text-align: center; max-width: 300px; line-height: 1.5; }
+        #retry {
+            display: none;
+            margin-top: 22px;
+            background: #6366f1;
+            color: #fff;
+            border: 0;
+            border-radius: 12px;
+            padding: 13px 28px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        #toggleLogs {
+            position: fixed;
+            bottom: 18px;
+            background: none;
+            border: 0;
+            color: #4b5563;
+            font-size: 12px;
+            padding: 10px;
+        }
+        #logs {
+            display: none;
+            position: fixed;
+            left: 14px;
+            right: 14px;
+            bottom: 54px;
+            max-height: 52vh;
+            overflow: auto;
+            background: #0f131a;
+            border: 1px solid #1d2431;
+            border-radius: 14px;
+            padding: 12px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+            font-size: 10.5px;
+            line-height: 1.5;
+            color: #8b93a1;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+    <div class="glow"></div>
+    <div class="logo">D</div>
+    <h1>Dravix</h1>
+    <div class="sub">OpenCode · runs on this device</div>
+    <div class="spinner" id="spinner"></div>
+    <div id="status">Starting Linux engine...</div>
+    <div id="detail">First launch extracts the bundled runtime. No internet needed.</div>
+    <button id="retry" onclick="retry()">Retry</button>
+    <button id="toggleLogs" onclick="toggleLogs()">Show logs</button>
+    <div id="logs"></div>
+
+    <script>
+        var logLines = [];
+        var logsOpen = false;
+        var lastStatus = 'STARTING';
+
+        var statusText = {
+            'STARTING': ['Starting Linux engine...', 'First launch extracts the bundled runtime. No internet needed.'],
+            'SHELL READY': ['Starting OpenCode...', 'Linux is up. Booting the local OpenCode server.'],
+            'ONLINE': ['OpenCode is ready', 'Opening the interface...'],
+            'ERROR': ['Something went wrong', 'Tap Retry. If it keeps failing, check the logs.'],
+            'SHELL DEAD': ['Engine stopped', 'Tap Retry to start it again.']
+        };
+
+        function applyStatus(status) {
+            if (!status) status = 'STARTING';
+            lastStatus = status;
+            var entry = statusText[status] || [status, ''];
+            document.getElementById('status').textContent = entry[0];
+            document.getElementById('detail').textContent = entry[1];
+
+            var spinner = document.getElementById('spinner');
+            var retryBtn = document.getElementById('retry');
+            var error = (status === 'ERROR' || status === 'SHELL DEAD');
+
+            spinner.classList.toggle('hidden', error);
+            retryBtn.style.display = error ? 'block' : 'none';
+
+            if (status === 'ONLINE') {
+                document.getElementById('status').style.color = '#34d399';
+            } else if (error) {
+                document.getElementById('status').style.color = '#f87171';
+            } else {
+                document.getElementById('status').style.color = '#a5b4fc';
+            }
+        }
+
+        function appendLog(line) {
+            logLines.push(line);
+            if (logLines.length > 400) logLines.shift();
+            var box = document.getElementById('logs');
+            box.textContent = logLines.join('\n');
+            box.scrollTop = box.scrollHeight;
+        }
+
+        window.onEngineStatus = function (status) {
+            applyStatus(status);
+        };
+
+        window.onNativeStatus = function (json) {
+            try {
+                var s = typeof json === 'string' ? JSON.parse(json) : json;
+                if (s.server) {
+                    applyStatus('ONLINE');
+                } else if (s.shell) {
+                    applyStatus('SHELL READY');
+                } else {
+                    applyStatus(s.status || 'STARTING');
+                }
+            } catch (e) {}
+        };
+
+        window.onTerminalOutput = function (line) {
+            appendLog(line);
+        };
+
+        window.onTerminalHistory = function (lines) {
+            logLines = Array.isArray(lines) ? lines.slice(-400) : [];
+            var box = document.getElementById('logs');
+            box.textContent = logLines.join('\n');
+        };
+
+        function retry() {
+            applyStatus('STARTING');
+            if (window.DravixNative && DravixNative.retry) {
+                DravixNative.retry();
+            }
+        }
+
+        function toggleLogs() {
+            logsOpen = !logsOpen;
+            var box = document.getElementById('logs');
+            box.style.display = logsOpen ? 'block' : 'none';
+            document.getElementById('toggleLogs').textContent = logsOpen ? 'Hide logs' : 'Show logs';
+            if (logsOpen) {
+                box.textContent = logLines.join('\n');
+                box.scrollTop = box.scrollHeight;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.DravixNative) {
+                try { window.onNativeStatus(DravixNative.getStatus()); } catch (e) {}
+                try { window.onTerminalHistory(JSON.parse(DravixNative.getHistory())); } catch (e) {}
+            } else {
+                document.getElementById('status').textContent = 'Native bridge unavailable';
+            }
+        });
+    </script>
+</body>
+</html>

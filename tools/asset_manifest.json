@@ -1,0 +1,34 @@
+[
+  {
+    "source": "opencode-aarch64",
+    "encrypted": "opencode-aarch64.enc",
+    "plain_size": 207162576,
+    "enc_size": 207162597,
+    "plain_sha256": "e07ad6ddf4a2ea62210b4fa11df47e78a8070c9382cdb8919e36bd4f7b2cf7d7",
+    "enc_sha256": "e0c1908ff65c853eea90b1d5559319e6b78c0e4bcdba48e32ac420e9c2eeec2d"
+  },
+  {
+    "source": "opencode-x86_64",
+    "encrypted": "opencode-x86_64.enc",
+    "plain_size": 212944432,
+    "enc_size": 212944453,
+    "plain_sha256": "e447ad024f3c09dc2451657e671346ea6fadb04aa96bca7f919d6364270716ad",
+    "enc_sha256": "4a0567d9c9935970758c4f936d693cb11eab8c2c0ad543a5e542d8a6f5631a2c"
+  },
+  {
+    "source": "rootfs-aarch64.bin",
+    "encrypted": "rootfs-aarch64.bin.enc",
+    "plain_size": 13493218,
+    "enc_size": 13493239,
+    "plain_sha256": "710f66c07dc0df622be1a6e4554e5c4ebf80a1ddb89f7a52c2038870b8f060cd",
+    "enc_sha256": "c737aa3f3fe7374e337668a6b409e58bb4a81877ceabef0e7df0dfaf7b3df3b3"
+  },
+  {
+    "source": "rootfs-x86_64.bin",
+    "encrypted": "rootfs-x86_64.bin.enc",
+    "plain_size": 12938341,
+    "enc_size": 12938362,
+    "plain_sha256": "d556a0a5a80c2187cc0ef0297f69f0833e9a4c52942c864c3a27c6a3199099ff",
+    "enc_sha256": "d983c5aebdab7853dd14e2171ea4890581e2c4e13111292e76a7d3f4c40ed761"
+  }
+]

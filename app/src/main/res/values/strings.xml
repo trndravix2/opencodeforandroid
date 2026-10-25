@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">NIVO WALL</string>
+    <string name="vpn_channel_name">NIVO WALL Protection</string>
+    <string name="vpn_notification_title">NIVO WALL Active</string>
+    <string name="vpn_notification_content">Zero Telemetry Leak • 12ms Flat Ping</string>
+</resources>
