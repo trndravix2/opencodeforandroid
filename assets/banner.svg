@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#060913"/>
+      <stop offset="50%" stop-color="#0a1022"/>
+      <stop offset="100%" stop-color="#03050a"/>
+    </linearGradient>
+
+    <!-- Neon Brand Gradients -->
+    <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00f2fe"/>
+      <stop offset="45%" stop-color="#4facfe"/>
+      <stop offset="80%" stop-color="#9d4edd"/>
+      <stop offset="100%" stop-color="#c77dff"/>
+    </linearGradient>
+
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff007f"/>
+      <stop offset="100%" stop-color="#7928ca"/>
+    </linearGradient>
+
+    <linearGradient id="borderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f2fe" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#7928ca" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#9d4edd" stop-opacity="0.6"/>
+    </linearGradient>
+
+    <linearGradient id="pillGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00f2fe" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#9d4edd" stop-opacity="0.15"/>
+    </linearGradient>
+
+    <!-- Glow Filters -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="30" result="blur"/>
+      <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.5 0"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <radialGradient id="cyanOrb" cx="15%" cy="30%" r="50%">
+      <stop offset="0%" stop-color="#00f2fe" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#00f2fe" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="purpleOrb" cx="85%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="#9d4edd" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#9d4edd" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Grid Pattern -->
+    <pattern id="techGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff" stroke-opacity="0.03" stroke-width="1"/>
+      <circle cx="40" cy="40" r="1" fill="#4facfe" fill-opacity="0.2"/>
+    </pattern>
+  </defs>
+
+  <style>
+    .mono { font-family: 'SF Pro Display', -apple-system, 'JetBrains Mono', 'Segoe UI', monospace; }
+    .heavy { font-family: 'SF Pro Display', -apple-system, 'Inter', 'Segoe UI', sans-serif; font-weight: 900; }
+    .medium { font-family: 'SF Pro Text', -apple-system, 'Inter', 'Segoe UI', sans-serif; font-weight: 500; }
+  </style>
+
+  <!-- Base Canvas -->
+  <rect width="1200" height="460" rx="16" fill="url(#bgGrad)"/>
+  
+  <!-- Glowing Orbs -->
+  <rect width="1200" height="460" rx="16" fill="url(#cyanOrb)"/>
+  <rect width="1200" height="460" rx="16" fill="url(#purpleOrb)"/>
+  
+  <!-- Subtle Matrix/Grid Overlay -->
+  <rect width="1200" height="460" rx="16" fill="url(#techGrid)"/>
+
+  <!-- Outer Tech Border -->
+  <rect x="12" y="12" width="1176" height="436" rx="12" fill="none" stroke="url(#borderGrad)" stroke-width="1.5" stroke-opacity="0.6"/>
+
+  <!-- Corner Tech Reticles -->
+  <path d="M 24 45 L 24 24 L 45 24" fill="none" stroke="#00f2fe" stroke-width="2.5"/>
+  <path d="M 1176 45 L 1176 24 L 1155 24" fill="none" stroke="#9d4edd" stroke-width="2.5"/>
+  <path d="M 24 415 L 24 436 L 45 436" fill="none" stroke="#00f2fe" stroke-width="2.5"/>
+  <path d="M 1176 415 L 1176 436 L 1155 436" fill="none" stroke="#9d4edd" stroke-width="2.5"/>
+
+  <!-- Top Status Bar -->
+  <g transform="translate(48, 48)">
+    <!-- Status Pill -->
+    <rect width="170" height="28" rx="14" fill="#00f2fe" fill-opacity="0.1" stroke="#00f2fe" stroke-opacity="0.3"/>
+    <circle cx="16" cy="14" r="5" fill="#00ff88" filter="url(#glow)"/>
+    <text x="32" y="19" fill="#a5f3fc" font-size="12" class="mono" font-weight="600" letter-spacing="1.5">LIVE RUNTIME</text>
+
+    <!-- Version & Port Badges -->
+    <text x="1000" y="19" text-anchor="end" fill="#94a3b8" font-size="12" class="mono" letter-spacing="1.2">SYS_LEAP // v2.2.0 • PORT: 4096</text>
+  </g>
+
+  <!-- Central Brand Identity -->
+  <g transform="translate(600, 200)" text-anchor="middle">
+    <!-- Ambient Background Blur for Title -->
+    <text y="-10" class="heavy" font-size="82" fill="#00f2fe" filter="url(#softGlow)" opacity="0.4" letter-spacing="6">TRN DRAVIX</text>
+
+    <!-- Main Title -->
+    <text y="-10" class="heavy" font-size="82" fill="url(#brandGrad)" letter-spacing="6" filter="url(#glow)">TRN DRAVIX</text>
+
+    <!-- Decorative Line Accents -->
+    <g transform="translate(0, 28)">
+      <line x1="-320" y1="0" x2="-140" y2="0" stroke="url(#brandGrad)" stroke-width="1.5" stroke-opacity="0.7"/>
+      <circle cx="-135" cy="0" r="3" fill="#00f2fe"/>
+      <text x="0" y="5" class="mono" font-size="14" fill="#e2e8f0" font-weight="700" letter-spacing="6">OPENCODE FOR ANDROID</text>
+      <circle cx="135" cy="0" r="3" fill="#9d4edd"/>
+      <line x1="140" y1="0" x2="320" y2="0" stroke="url(#brandGrad)" stroke-width="1.5" stroke-opacity="0.7"/>
+    </g>
+
+    <!-- Subtitle Description -->
+    <text y="70" class="medium" font-size="16" fill="#94a3b8" letter-spacing="0.5">
+      Autonomous Rootless Linux AI Workspace &amp; Engine Environment
+    </text>
+  </g>
+
+  <!-- Bottom Feature Badges Bar -->
+  <g transform="translate(600, 375)">
+    <!-- Badge 1: PRoot Engine -->
+    <g transform="translate(-400, 0)">
+      <rect x="-85" y="-18" width="170" height="36" rx="8" fill="url(#pillGrad)" stroke="#4facfe" stroke-opacity="0.3"/>
+      <text text-anchor="middle" y="5" fill="#e0f2fe" class="mono" font-size="12" font-weight="600">⚡ ROOTLESS PROOT</text>
+    </g>
+
+    <!-- Badge 2: Alpine Linux -->
+    <g transform="translate(-135, 0)">
+      <rect x="-85" y="-18" width="170" height="36" rx="8" fill="url(#pillGrad)" stroke="#38bdf8" stroke-opacity="0.3"/>
+      <text text-anchor="middle" y="5" fill="#e0f2fe" class="mono" font-size="12" font-weight="600">🐧 ALPINE ROOTFS</text>
+    </g>
+
+    <!-- Badge 3: Hardware Keystore -->
+    <g transform="translate(135, 0)">
+      <rect x="-95" y="-18" width="190" height="36" rx="8" fill="url(#pillGrad)" stroke="#c084fc" stroke-opacity="0.3"/>
+      <text text-anchor="middle" y="5" fill="#f3e8ff" class="mono" font-size="12" font-weight="600">🛡️ HARDWARE ATTESTED</text>
+    </g>
+
+    <!-- Badge 4: Zero External Dependency -->
+    <g transform="translate(400, 0)">
+      <rect x="-85" y="-18" width="170" height="36" rx="8" fill="url(#pillGrad)" stroke="#e879f9" stroke-opacity="0.3"/>
+      <text text-anchor="middle" y="5" fill="#fce7f3" class="mono" font-size="12" font-weight="600">📦 ZERO-CONFIG APK</text>
+    </g>
+  </g>
+</svg>
