@@ -3,113 +3,213 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-    <title>Dravix</title>
+    <meta name="theme-color" content="#0a0a0a" />
+    <title>OpenCode</title>
     <style>
-        :root { color-scheme: dark; }
+        :root {
+            color-scheme: dark;
+            --bg: #0a0a0a;
+            --card: #101010;
+            --border: #262626;
+            --border-strong: #333333;
+            --text: #ededed;
+            --muted: #737373;
+            --faint: #4d4d4d;
+            --error: #f87171;
+        }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        html, body { height: 100%; }
+        html, body { min-height: 100%; }
         body {
             margin: 0;
-            background: #0a0c10;
-            color: #e5e7eb;
+            background: var(--bg);
+            color: var(--text);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            display: flex;
+            justify-content: center;
+            overflow-x: hidden;
+            overflow-y: auto;
+            padding:
+                max(26px, env(safe-area-inset-top))
+                22px
+                max(18px, env(safe-area-inset-bottom));
+        }
+        .page {
+            width: 100%;
+            max-width: 420px;
+            min-height: calc(100dvh - max(26px, env(safe-area-inset-top)) - max(18px, env(safe-area-inset-bottom)));
+            display: flex;
+            flex-direction: column;
+            animation: fade-in .32s ease-out both;
+        }
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .brand {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 28px;
+            margin-top: clamp(36px, 10vh, 104px);
+        }
+        .mark {
+            width: 68px;
+            height: 68px;
+            border-radius: 17px;
             overflow: hidden;
+            background: #161616;
+            border: 1px solid #2e2e2e;
         }
-        .glow {
-            position: fixed;
-            width: 420px;
-            height: 420px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(99,102,241,.18), transparent 65%);
-            top: -140px;
-            right: -140px;
-            pointer-events: none;
+        .mark img {
+            display: block;
+            width: 100%;
+            height: 100%;
         }
-        .logo {
-            width: 66px;
-            height: 66px;
+        .name {
+            margin-top: 15px;
+            font-size: 28px;
+            font-weight: 500;
+            letter-spacing: -.025em;
+            line-height: 1;
+            color: #f5f5f5;
+        }
+        .tagline {
+            margin-top: 5px;
+            font-size: 12px;
+            color: var(--muted);
+            letter-spacing: .01em;
+        }
+        .card {
+            width: 100%;
+            margin-top: 30px;
+            padding: 24px 20px 20px;
+            background: var(--card);
+            border: 1px solid var(--border);
             border-radius: 18px;
-            background: linear-gradient(135deg, #6366f1, #22d3ee);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            font-weight: 800;
-            color: #fff;
-            box-shadow: 0 10px 40px rgba(99,102,241,.35);
-            margin-bottom: 20px;
+            text-align: center;
         }
-        h1 { font-size: 24px; font-weight: 700; margin: 0 0 6px; letter-spacing: -.02em; }
-        .sub { color: #7c8494; font-size: 13px; margin-bottom: 30px; }
         .spinner {
-            width: 28px;
-            height: 28px;
-            border: 3px solid #1c2230;
-            border-top-color: #6366f1;
+            width: 26px;
+            height: 26px;
+            margin: 0 auto 17px;
+            border: 2px solid #252525;
+            border-top-color: var(--text);
             border-radius: 50%;
-            animation: spin .9s linear infinite;
-            margin-bottom: 16px;
+            animation: spin .8s linear infinite;
         }
         .spinner.hidden { display: none; }
         @keyframes spin { to { transform: rotate(360deg); } }
-        #status { font-size: 14px; font-weight: 600; color: #a5b4fc; text-align: center; min-height: 20px; }
-        #detail { font-size: 12px; color: #6b7280; margin-top: 8px; text-align: center; max-width: 300px; line-height: 1.5; }
+        #status {
+            min-height: 23px;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.45;
+            letter-spacing: -.01em;
+            color: var(--text);
+        }
+        #detail {
+            min-height: 38px;
+            margin-top: 7px;
+            font-size: 12px;
+            line-height: 1.6;
+            color: var(--muted);
+        }
         #retry {
             display: none;
-            margin-top: 22px;
-            background: #6366f1;
-            color: #fff;
+            width: 100%;
+            margin-top: 20px;
+            padding: 14px 18px;
             border: 0;
             border-radius: 12px;
-            padding: 13px 28px;
+            background: #ededed;
+            color: #0a0a0a;
+            font: inherit;
             font-size: 14px;
             font-weight: 600;
+            cursor: pointer;
+        }
+        #retry:active { opacity: .78; }
+        .footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: auto;
+            padding-top: 28px;
         }
         #toggleLogs {
-            position: fixed;
-            bottom: 18px;
-            background: none;
+            padding: 8px 0;
             border: 0;
-            color: #4b5563;
-            font-size: 12px;
-            padding: 10px;
+            background: none;
+            color: #666666;
+            font: inherit;
+            font-size: 11px;
+            cursor: pointer;
+        }
+        .credit {
+            color: var(--faint);
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: .04em;
+            white-space: nowrap;
+            user-select: none;
         }
         #logs {
             display: none;
             position: fixed;
             left: 14px;
             right: 14px;
-            bottom: 54px;
+            bottom: calc(64px + env(safe-area-inset-bottom));
+            z-index: 10;
             max-height: 52vh;
             overflow: auto;
-            background: #0f131a;
-            border: 1px solid #1d2431;
+            padding: 13px 14px;
+            background: #0d0d0d;
+            border: 1px solid var(--border);
             border-radius: 14px;
-            padding: 12px;
-            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+            color: #8a8a8a;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
             font-size: 10.5px;
-            line-height: 1.5;
-            color: #8b93a1;
+            line-height: 1.55;
             white-space: pre-wrap;
-            word-break: break-all;
+            word-break: break-word;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, .45);
+        }
+        #logs:empty::before {
+            content: "No engine output yet.";
+            color: #555555;
+        }
+        @media (max-height: 680px) {
+            .brand { margin-top: 18px; }
+            .mark { width: 58px; height: 58px; border-radius: 15px; }
+            .name { font-size: 25px; margin-top: 12px; }
+            .card { margin-top: 20px; padding-top: 20px; }
+            .footer { padding-top: 18px; }
         }
     </style>
 </head>
 <body>
-    <div class="glow"></div>
-    <div class="logo">D</div>
-    <h1>Dravix</h1>
-    <div class="sub">OpenCode · runs on this device</div>
-    <div class="spinner" id="spinner"></div>
-    <div id="status">Starting Linux engine...</div>
-    <div id="detail">First launch extracts the bundled runtime. No internet needed.</div>
-    <button id="retry" onclick="retry()">Retry</button>
-    <button id="toggleLogs" onclick="toggleLogs()">Show logs</button>
+    <main class="page">
+        <header class="brand">
+            <div class="mark">
+                <img src="opencode.png" alt="OpenCode" />
+            </div>
+            <div class="name">opencode</div>
+            <div class="tagline">secure access</div>
+        </header>
+
+        <section class="card" aria-live="polite">
+            <div class="spinner" id="spinner"></div>
+            <div id="status">Starting Linux engine...</div>
+            <div id="detail">First launch extracts the bundled runtime. No internet needed.</div>
+            <button id="retry" onclick="retry()">Retry engine</button>
+        </section>
+
+        <footer class="footer">
+            <button id="toggleLogs" onclick="toggleLogs()">Show logs</button>
+            <span class="credit">powered by @trndravix</span>
+        </footer>
+    </main>
+
     <div id="logs"></div>
 
     <script>
@@ -121,7 +221,7 @@
             'STARTING': ['Starting Linux engine...', 'First launch extracts the bundled runtime. No internet needed.'],
             'SHELL READY': ['Starting OpenCode...', 'Linux is up. Booting the local OpenCode server.'],
             'ONLINE': ['OpenCode is ready', 'Opening the interface...'],
-            'ERROR': ['Something went wrong', 'Tap Retry. If it keeps failing, check the logs.'],
+            'ERROR': ['Engine failed to start', 'Tap Retry. If it keeps failing, check the logs.'],
             'SHELL DEAD': ['Engine stopped', 'Tap Retry to start it again.']
         };
 
@@ -136,15 +236,15 @@
             var retryBtn = document.getElementById('retry');
             var error = (status === 'ERROR' || status === 'SHELL DEAD');
 
-            spinner.classList.toggle('hidden', error);
+            spinner.classList.toggle('hidden', error || status === 'ONLINE');
             retryBtn.style.display = error ? 'block' : 'none';
 
             if (status === 'ONLINE') {
-                document.getElementById('status').style.color = '#34d399';
+                document.getElementById('status').style.color = '#ededed';
             } else if (error) {
                 document.getElementById('status').style.color = '#f87171';
             } else {
-                document.getElementById('status').style.color = '#a5b4fc';
+                document.getElementById('status').style.color = '#ededed';
             }
         }
 
@@ -207,6 +307,7 @@
                 try { window.onTerminalHistory(JSON.parse(DravixNative.getHistory())); } catch (e) {}
             } else {
                 document.getElementById('status').textContent = 'Native bridge unavailable';
+                document.getElementById('detail').textContent = 'Reopen the app to reconnect to the local engine.';
             }
         });
     </script>

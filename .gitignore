@@ -43,3 +43,8 @@ app/src/main/assets/opencode-aarch64
 app/src/main/assets/opencode-aarch64.enc
 app/src/main/assets/opencode-x86_64
 app/src/main/assets/opencode-x86_64.enc
+
+# Archive files
+*.zip
+*.tar.gz
+*.7z

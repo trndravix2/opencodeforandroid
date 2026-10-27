@@ -26,8 +26,8 @@ android {
         // the bundled PRoot/Alpine/OpenCode runtime. This app is sideloaded,
         // not distributed through Play Store.
         targetSdk = 28
-        versionCode = 6
-        versionName = "2.2.0-lease"
+        versionCode = 11
+        versionName = "2.2.5"
 
         vectorDrawables {
             useSupportLibrary = true

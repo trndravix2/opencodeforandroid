@@ -85,7 +85,7 @@ class GateActivity : AppCompatActivity() {
         bindViews()
         wireActions()
 
-        gateFooter.text = "Protected by Dravix - server-side access"
+        gateFooter.text = "powered by @trndravix"
         loginPassword.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 doLogin()
@@ -196,7 +196,7 @@ class GateActivity : AppCompatActivity() {
                 .setMessage(
                     config.optString(
                         "maintenance_message",
-                        "Dravix OpenCode is under maintenance. Please try again shortly."
+                        "OpenCode is under maintenance. Please try again shortly."
                     )
                 )
                 .setCancelable(false)
@@ -225,7 +225,7 @@ class GateActivity : AppCompatActivity() {
         val changelog = config.optString("update_changelog", "").trim()
         val versionName = config.optString("latest_version_name", latest.toString())
         val message = buildString {
-            append("A newer Dravix OpenCode build is available (v")
+            append("A newer OpenCode build is available (v")
             append(versionName)
             append(").")
             if (changelog.isNotBlank()) {
@@ -812,7 +812,7 @@ class GateActivity : AppCompatActivity() {
         resetVerificationState()
         hideAllPanels()
         registerPanel.visibility = View.VISIBLE
-        status.text = "Create your free account"
+        status.text = "Create your account"
         registerUsername.requestFocus()
         hideError()
     }
@@ -835,7 +835,7 @@ class GateActivity : AppCompatActivity() {
         verifyPanel.visibility = View.VISIBLE
         status.text = "Free access verification"
         verifyTitle.text = "Unlock 24 hours of access"
-        verifyDetail.text = "Complete one short verification page to use Dravix for free. Paid and comp accounts skip this step."
+        verifyDetail.text = "Complete one short verification page to use OpenCode for free. Paid and comp accounts skip this step."
         verifyButton.text = if (shortUrl != null) "Open verification page" else "Verify free access"
         checkButton.visibility = if (verifySession != null) View.VISIBLE else View.GONE
         hideError()

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Theme.Dravix" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:windowBackground">#0B0F17</item>
-        <item name="android:statusBarColor">#0B0F17</item>
-        <item name="android:navigationBarColor">#0B0F17</item>
+        <item name="android:windowBackground">#0A0A0A</item>
+        <item name="android:statusBarColor">#0A0A0A</item>
+        <item name="android:navigationBarColor">#0A0A0A</item>
         <item name="android:windowLightStatusBar">false</item>
+        <item name="colorAccent">#EDEDED</item>
+        <item name="colorControlActivated">#EDEDED</item>
     </style>
 </resources>
