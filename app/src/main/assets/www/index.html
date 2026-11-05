@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <title>OpenCode</title>
+    <style>
+        :root {
+            color-scheme: dark;
+            --bg: #0a0a0a;
+            --card: #101010;
+            --border: #262626;
+            --border-strong: #333333;
+            --text: #ededed;
+            --muted: #737373;
+            --faint: #4d4d4d;
+            --error: #f87171;
+        }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        html, body { min-height: 100%; }
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            display: flex;
+            justify-content: center;
+            overflow-x: hidden;
+            overflow-y: auto;
+            padding:
+                max(26px, env(safe-area-inset-top))
+                22px
+                max(18px, env(safe-area-inset-bottom));
+        }
+        .page {
+            width: 100%;
+            max-width: 420px;
+            min-height: calc(100dvh - max(26px, env(safe-area-inset-top)) - max(18px, env(safe-area-inset-bottom)));
+            display: flex;
+            flex-direction: column;
+            animation: fade-in .32s ease-out both;
+        }
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .brand {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: clamp(36px, 10vh, 104px);
+        }
+        .mark {
+            width: 68px;
+            height: 68px;
+            border-radius: 17px;
+            overflow: hidden;
+            background: #161616;
+            border: 1px solid #2e2e2e;
+        }
+        .mark img {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        .name {
+            margin-top: 15px;
+            font-size: 28px;
+            font-weight: 500;
+            letter-spacing: -.025em;
+            line-height: 1;
+            color: #f5f5f5;
+        }
+        .tagline {
+            margin-top: 5px;
+            font-size: 12px;
+            color: var(--muted);
+            letter-spacing: .01em;
+        }
+        .card {
+            width: 100%;
+            margin-top: 30px;
+            padding: 24px 20px 20px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            text-align: center;
+        }
+        .spinner {
+            width: 26px;
+            height: 26px;
+            margin: 0 auto 17px;
+            border: 2px solid #252525;
+            border-top-color: var(--text);
+            border-radius: 50%;
+            animation: spin .8s linear infinite;
+        }
+        .spinner.hidden { display: none; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        #status {
+            min-height: 23px;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.45;
+            letter-spacing: -.01em;
+            color: var(--text);
+        }
+        #detail {
+            min-height: 38px;
+            margin-top: 7px;
+            font-size: 12px;
+            line-height: 1.6;
+            color: var(--muted);
+        }
+        #retry {
+            display: none;
+            width: 100%;
+            margin-top: 20px;
+            padding: 14px 18px;
+            border: 0;
+            border-radius: 12px;
+            background: #ededed;
+            color: #0a0a0a;
+            font: inherit;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        #retry:active { opacity: .78; }
+        .footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: auto;
+            padding-top: 28px;
+        }
+        #toggleLogs {
+            padding: 8px 0;
+            border: 0;
+            background: none;
+            color: #666666;
+            font: inherit;
+            font-size: 11px;
+            cursor: pointer;
+        }
+        .credit {
+            color: var(--faint);
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: .04em;
+            white-space: nowrap;
+            user-select: none;
+        }
+        #logs {
+            display: none;
+            position: fixed;
+            left: 14px;
+            right: 14px;
+            bottom: calc(64px + env(safe-area-inset-bottom));
+            z-index: 10;
+            max-height: 52vh;
+            overflow: auto;
+            padding: 13px 14px;
+            background: #0d0d0d;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            color: #8a8a8a;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-size: 10.5px;
+            line-height: 1.55;
+            white-space: pre-wrap;
+            word-break: break-word;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, .45);
+        }
+        #logs:empty::before {
+            content: "No engine output yet.";
+            color: #555555;
+        }
+        @media (max-height: 680px) {
+            .brand { margin-top: 18px; }
+            .mark { width: 58px; height: 58px; border-radius: 15px; }
+            .name { font-size: 25px; margin-top: 12px; }
+            .card { margin-top: 20px; padding-top: 20px; }
+            .footer { padding-top: 18px; }
+        }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <header class="brand">
+            <div class="mark">
+                <img src="opencode.png" alt="OpenCode" />
+            </div>
+            <div class="name">opencode</div>
+            <div class="tagline">secure access</div>
+        </header>
+
+        <section class="card" aria-live="polite">
+            <div class="spinner" id="spinner"></div>
+            <div id="status">Starting Linux engine...</div>
+            <div id="detail">First launch extracts the bundled runtime. No internet needed.</div>
+            <button id="retry" onclick="retry()">Retry engine</button>
+        </section>
+
+        <footer class="footer">
+            <button id="toggleLogs" onclick="toggleLogs()">Show logs</button>
+            <span class="credit">powered by @trndravix</span>
+        </footer>
+    </main>
+
+    <div id="logs"></div>
+
+    <script>
+        var logLines = [];
+        var logsOpen = false;
+        var lastStatus = 'STARTING';
+
+        var statusText = {
+            'STARTING': ['Starting Linux engine...', 'First launch extracts the bundled runtime. No internet needed.'],
+            'SHELL READY': ['Starting OpenCode...', 'Linux is up. Booting the local OpenCode server.'],
+            'ONLINE': ['OpenCode is ready', 'Opening the interface...'],
+            'ERROR': ['Engine failed to start', 'Tap Retry. If it keeps failing, check the logs.'],
+            'SHELL DEAD': ['Engine stopped', 'Tap Retry to start it again.']
+        };
+
+        function applyStatus(status) {
+            if (!status) status = 'STARTING';
+            lastStatus = status;
+            var entry = statusText[status] || [status, ''];
+            document.getElementById('status').textContent = entry[0];
+            document.getElementById('detail').textContent = entry[1];
+
+            var spinner = document.getElementById('spinner');
+            var retryBtn = document.getElementById('retry');
+            var error = (status === 'ERROR' || status === 'SHELL DEAD');
+
+            spinner.classList.toggle('hidden', error || status === 'ONLINE');
+            retryBtn.style.display = error ? 'block' : 'none';
+
+            if (status === 'ONLINE') {
+                document.getElementById('status').style.color = '#ededed';
+            } else if (error) {
+                document.getElementById('status').style.color = '#f87171';
+            } else {
+                document.getElementById('status').style.color = '#ededed';
+            }
+        }
+
+        function appendLog(line) {
+            logLines.push(line);
+            if (logLines.length > 400) logLines.shift();
+            var box = document.getElementById('logs');
+            box.textContent = logLines.join('\n');
+            box.scrollTop = box.scrollHeight;
+        }
+
+        window.onEngineStatus = function (status) {
+            applyStatus(status);
+        };
+
+        window.onNativeStatus = function (json) {
+            try {
+                var s = typeof json === 'string' ? JSON.parse(json) : json;
+                if (s.server) {
+                    applyStatus('ONLINE');
+                } else if (s.shell) {
+                    applyStatus('SHELL READY');
+                } else {
+                    applyStatus(s.status || 'STARTING');
+                }
+            } catch (e) {}
+        };
+
+        window.onTerminalOutput = function (line) {
+            appendLog(line);
+        };
+
+        window.onTerminalHistory = function (lines) {
+            logLines = Array.isArray(lines) ? lines.slice(-400) : [];
+            var box = document.getElementById('logs');
+            box.textContent = logLines.join('\n');
+        };
+
+        function retry() {
+            applyStatus('STARTING');
+            if (window.DravixNative && DravixNative.retry) {
+                DravixNative.retry();
+            }
+        }
+
+        function toggleLogs() {
+            logsOpen = !logsOpen;
+            var box = document.getElementById('logs');
+            box.style.display = logsOpen ? 'block' : 'none';
+            document.getElementById('toggleLogs').textContent = logsOpen ? 'Hide logs' : 'Show logs';
+            if (logsOpen) {
+                box.textContent = logLines.join('\n');
+                box.scrollTop = box.scrollHeight;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.DravixNative) {
+                try { window.onNativeStatus(DravixNative.getStatus()); } catch (e) {}
+                try { window.onTerminalHistory(JSON.parse(DravixNative.getHistory())); } catch (e) {}
+            } else {
+                document.getElementById('status').textContent = 'Native bridge unavailable';
+                document.getElementById('detail').textContent = 'Reopen the app to reconnect to the local engine.';
+            }
+        });
+    </script>
+</body>
+</html>

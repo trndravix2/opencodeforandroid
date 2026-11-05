@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0A0A0A">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingLeft="26dp"
+            android:paddingTop="46dp"
+            android:paddingRight="26dp"
+            android:paddingBottom="30dp">
+
+            <TextView
+                android:id="@+id/gateLogo"
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:background="@drawable/bg_logo"
+                android:fontFamily="monospace"
+                android:gravity="center"
+                android:letterSpacing="0.02"
+                android:text=">_"
+                android:textColor="#EDEDED"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="sans-serif-medium"
+                android:letterSpacing="0.01"
+                android:text="opencode"
+                android:textColor="#F5F5F5"
+                android:textSize="28sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="sans-serif"
+                android:text="secure access"
+                android:textColor="#737373"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/gateStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
+                android:gravity="center"
+                android:text="Checking access…"
+                android:textColor="#A3A3A3"
+                android:textSize="13sp"
+                android:textStyle="normal" />
+
+            <ProgressBar
+                android:id="@+id/gateProgress"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="18dp"
+                android:indeterminateTint="#D4D4D4"
+                android:visibility="gone" />
+
+            <!-- Login -->
+            <LinearLayout
+                android:id="@+id/authPanel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/bg_panel"
+                android:orientation="vertical"
+                android:padding="18dp"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/loginUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:background="@drawable/bg_input"
+                    android:hint="Username"
+                    android:inputType="text"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:singleLine="true"
+                    android:textColor="#EDEDED"
+                    android:textColorHint="#737373"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/loginPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_input"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:singleLine="true"
+                    android:textColor="#EDEDED"
+                    android:textColorHint="#737373"
+                    android:textSize="15sp" />
+
+                <Button
+                    android:id="@+id/loginButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_button_primary"
+                    android:text="Log in"
+                    android:textAllCaps="false"
+                    android:textColor="#0A0A0A"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/telegramLoginButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_button_secondary"
+                    android:drawableStart="@drawable/ic_telegram"
+                    android:drawablePadding="8dp"
+                    android:paddingLeft="14dp"
+                    android:paddingRight="14dp"
+                    android:text="Continue with Telegram"
+                    android:textAllCaps="false"
+                    android:textColor="#EDEDED"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="Optional. Telegram login creates or opens your account."
+                    android:textColor="#666666"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/goRegister"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="New here? Create an account"
+                    android:textColor="#A3A3A3"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!-- Register -->
+            <LinearLayout
+                android:id="@+id/registerPanel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/bg_panel"
+                android:orientation="vertical"
+                android:padding="18dp"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/registerUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:background="@drawable/bg_input"
+                    android:hint="Choose a username"
+                    android:inputType="text"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:singleLine="true"
+                    android:textColor="#EDEDED"
+                    android:textColorHint="#737373"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/registerPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_input"
+                    android:hint="Password (min 6 characters)"
+                    android:inputType="textPassword"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:singleLine="true"
+                    android:textColor="#EDEDED"
+                    android:textColorHint="#737373"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/registerConfirm"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_input"
+                    android:hint="Confirm password"
+                    android:inputType="textPassword"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:singleLine="true"
+                    android:textColor="#EDEDED"
+                    android:textColorHint="#737373"
+                    android:textSize="15sp" />
+
+                <Button
+                    android:id="@+id/registerButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_button_primary"
+                    android:text="Create account"
+                    android:textAllCaps="false"
+                    android:textColor="#0A0A0A"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/backToLogin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="Back to login"
+                    android:textColor="#A3A3A3"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!-- Shared access choice: free GPLinks or paid/comp code -->
+            <LinearLayout
+                android:id="@+id/choicePanel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/bg_panel"
+                android:orientation="vertical"
+                android:padding="18dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/choiceTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Choose how to continue"
+                    android:textColor="#F5F5F5"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/choiceDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:lineSpacingExtra="3dp"
+                    android:text="Enter your activation code to continue."
+                    android:textColor="#8A8A8A"
+                    android:textSize="13sp" />
+
+                <Button
+                    android:id="@+id/freeAccessButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="18dp"
+                    android:background="@drawable/bg_button_primary"
+                    android:text="Free 24h access"
+                    android:textAllCaps="false"
+                    android:textColor="#0A0A0A"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/codeAccessButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_button_secondary"
+                    android:text="I have an activation code"
+                    android:textAllCaps="false"
+                    android:textColor="#EDEDED"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/retryLeaseButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_button_secondary"
+                    android:text="Retry secure license"
+                    android:textAllCaps="false"
+                    android:textColor="#EDEDED"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/choiceLogoutLink"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="Log out"
+                    android:textColor="#666666"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!-- Free verification / status -->
+            <LinearLayout
+                android:id="@+id/verifyPanel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/bg_panel"
+                android:orientation="vertical"
+                android:padding="18dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/verifyTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Free access verification"
+                    android:textColor="#F5F5F5"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/verifyDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:lineSpacingExtra="3dp"
+                    android:text="Complete one short verification link to unlock 24 hours of access."
+                    android:textColor="#8A8A8A"
+                    android:textSize="13sp" />
+
+                <Button
+                    android:id="@+id/verifyButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="18dp"
+                    android:background="@drawable/bg_button_primary"
+                    android:text="Verify free access"
+                    android:textAllCaps="false"
+                    android:textColor="#0A0A0A"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/checkButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_button_secondary"
+                    android:text="I completed the page"
+                    android:textAllCaps="false"
+                    android:textColor="#EDEDED"
+                    android:textSize="14sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/redeemLink"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="Already have an activation key? Redeem it"
+                    android:textColor="#A3A3A3"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/backToChoice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="Back to access options"
+                    android:textColor="#A3A3A3"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/hwidLink"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="Changing phone? Request HWID reset"
+                    android:textColor="#666666"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/logoutLink"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="Log out"
+                    android:textColor="#666666"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/gateError"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:gravity="center"
+                android:lineSpacingExtra="2dp"
+                android:textColor="#F87171"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/gateFooter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:letterSpacing="0.04"
+                android:text="powered by @trndravix"
+                android:textColor="#4D4D4D"
+                android:textSize="10sp" />
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

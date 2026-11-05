@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0E0E10"/>
+      <stop offset="50%" stop-color="#0A0A0A"/>
+      <stop offset="100%" stop-color="#050505"/>
+    </linearGradient>
+
+    <!-- Ambient Center Light -->
+    <radialGradient id="centerLight" cx="50%" cy="38%" r="55%">
+      <stop offset="0%" stop-color="#1F1F24" stop-opacity="0.6"/>
+      <stop offset="60%" stop-color="#0A0A0A" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Card Background -->
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#141416"/>
+      <stop offset="100%" stop-color="#0D0D0E"/>
+    </linearGradient>
+
+    <!-- Text Gradient for Title -->
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="60%" stop-color="#EDEDED"/>
+      <stop offset="100%" stop-color="#A1A1AA"/>
+    </linearGradient>
+
+    <!-- Subtle Accent Line -->
+    <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#262626" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#52525B" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#262626" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Grid Pattern -->
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#262626" stroke-width="0.75" stroke-opacity="0.35"/>
+    </pattern>
+  </defs>
+
+  <style>
+    .font-sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", sans-serif; }
+    .font-mono { font-family: "JetBrains Mono", "SF Mono", Menlo, Monaco, Consolas, "Courier New", monospace; }
+  </style>
+
+  <!-- Background Base -->
+  <rect width="1200" height="440" rx="16" fill="url(#bgGrad)"/>
+  <rect width="1200" height="440" rx="16" fill="url(#centerLight)"/>
+  <rect width="1200" height="440" rx="16" fill="url(#grid)"/>
+
+  <!-- Outer Structural Border -->
+  <rect x="12" y="12" width="1176" height="416" rx="12" fill="none" stroke="#262626" stroke-width="1.2"/>
+
+  <!-- Top Navigation / Status Header Bar -->
+  <g transform="translate(44, 40)">
+    <!-- Terminal Dots -->
+    <circle cx="0" cy="10" r="5" fill="#262626"/>
+    <circle cx="16" cy="10" r="5" fill="#262626"/>
+    <circle cx="32" cy="10" r="5" fill="#262626"/>
+
+    <!-- Breadcrumb Path -->
+    <text x="60" y="14" class="font-mono" font-size="12" fill="#71717A" letter-spacing="0.5">android / src / main / opencode-engine</text>
+
+    <!-- Right Header Badges -->
+    <g transform="translate(1112, 0)">
+      <rect x="-170" y="-4" width="170" height="28" rx="6" fill="#141416" stroke="#262626" stroke-width="1"/>
+      <circle cx="-154" cy="10" r="3.5" fill="#22C55E"/>
+      <text x="-142" y="14" class="font-mono" font-size="11" fill="#A1A1AA" letter-spacing="0.5">SYSTEM ACTIVE : 4096</text>
+    </g>
+  </g>
+
+  <!-- Divider Line -->
+  <line x1="44" y1="76" x2="1156" y2="76" stroke="#262626" stroke-width="1"/>
+
+  <!-- Central Brand Presentation -->
+  <g transform="translate(600, 168)" text-anchor="middle">
+    <!-- OpenCode Minimalist Terminal Icon Badge -->
+    <g transform="translate(-32, -64)">
+      <rect width="64" height="64" rx="16" fill="#161616" stroke="#2E2E2E" stroke-width="1.2"/>
+      <text x="32" y="42" class="font-mono" font-size="28" font-weight="700" fill="#EDEDED" text-anchor="middle">&gt;_</text>
+    </g>
+
+    <!-- Main Title -->
+    <text y="42" class="font-sans" font-size="46" font-weight="700" fill="url(#titleGrad)" letter-spacing="-1">
+      OpenCode for Android
+    </text>
+
+    <!-- Author Attribution -->
+    <g transform="translate(0, 72)">
+      <text class="font-mono" font-size="13" font-weight="500" fill="#71717A" letter-spacing="2">
+        DEVELOPED BY <tspan fill="#E4E4E7" font-weight="700">TRNDRAVIX</tspan>
+      </text>
+    </g>
+
+    <!-- Subtitle -->
+    <text y="104" class="font-sans" font-size="15" fill="#A1A1AA" letter-spacing="0.2">
+      Self-Contained Rootless Linux Runtime and Autonomous AI Workspace for Mobile
+    </text>
+  </g>
+
+  <!-- Horizontal Accent -->
+  <line x1="280" y1="324" x2="920" y2="324" stroke="url(#lineGrad)" stroke-width="1"/>
+
+  <!-- Bottom Architecture Metrics / Specs (NO EMOJIS) -->
+  <g transform="translate(600, 368)">
+    <!-- Spec Item 1 -->
+    <g transform="translate(-375, 0)">
+      <rect x="-105" y="-18" width="210" height="36" rx="8" fill="url(#cardGrad)" stroke="#262626" stroke-width="1"/>
+      <text text-anchor="middle" y="5" fill="#D4D4D8" class="font-mono" font-size="11" font-weight="600" letter-spacing="0.5">PROOT VIRTUALIZATION</text>
+    </g>
+
+    <!-- Spec Item 2 -->
+    <g transform="translate(-125, 0)">
+      <rect x="-105" y="-18" width="210" height="36" rx="8" fill="url(#cardGrad)" stroke="#262626" stroke-width="1"/>
+      <text text-anchor="middle" y="5" fill="#D4D4D8" class="font-mono" font-size="11" font-weight="600" letter-spacing="0.5">ALPINE ROOTFS BUNDLED</text>
+    </g>
+
+    <!-- Spec Item 3 -->
+    <g transform="translate(125, 0)">
+      <rect x="-105" y="-18" width="210" height="36" rx="8" fill="url(#cardGrad)" stroke="#262626" stroke-width="1"/>
+      <text text-anchor="middle" y="5" fill="#D4D4D8" class="font-mono" font-size="11" font-weight="600" letter-spacing="0.5">KEYSTORE ATTESTATION</text>
+    </g>
+
+    <!-- Spec Item 4 -->
+    <g transform="translate(375, 0)">
+      <rect x="-105" y="-18" width="210" height="36" rx="8" fill="url(#cardGrad)" stroke="#262626" stroke-width="1"/>
+      <text text-anchor="middle" y="5" fill="#D4D4D8" class="font-mono" font-size="11" font-weight="600" letter-spacing="0.5">LOCAL PORT 4096</text>
+    </g>
+  </g>
+</svg>
